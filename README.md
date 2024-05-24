@@ -8,5 +8,5 @@ This is a data science project for DSC80 at UCSD focusing on exploring the relat
 ## Hypothesis Testing ##
 ## Framing a Prediction Problem ##
 ## Baseline Model ##
-## Final Model##
-## Fairness Analysis##
+## Final Model ##
+## Fairness Analysis ##
