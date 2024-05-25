@@ -58,7 +58,7 @@ The data types of the columns of 'recipes' are shown below:
 
 -First we convert the submitted column to the Datatime type. This is because the data in this column represents the month and year when the recipe was submitted. Converting to Datatime type facilitates subsequent exploration of the data.
 
--Second, combine our concerns. The protein content in each recipe needs to be obtained. So we need to take the 7 types of information contained in nutrition ('calories (#)', 'total fat (PDV)', 'sugar (PDV)', 'sodium (PDV)', 'protein (PDV)', ''saturated fat (PDV)'', ''carbohydrates (PDV)'') and extract and each became a new column.
+-Second, combine our concerns. The protein content in each recipe needs to be obtained. So we need to take the 7 types of information contained in nutrition **('calories (#)', 'total fat (PDV)', 'sugar (PDV)', 'sodium (PDV)', 'protein (PDV)', 'saturated fat (PDV)', 'carbohydrates (PDV)')** and extract and each became a new column.
 
 Annotate:PDV (Predicted Daily Value) is a marker used to assess the extent to which a nutrient in a food contributes to the required daily intake.PDV is calculated based on the Recommended Daily Intake (RDI) or Daily Reference Value (DRV). Values). This type of labeling helps consumers understand the extent to which the amount of a nutrient in a single food or beverage complements their daily nutritional needs.
 PDV calculation formula：$$
