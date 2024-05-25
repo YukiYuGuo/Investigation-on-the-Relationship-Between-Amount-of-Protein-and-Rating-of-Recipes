@@ -44,7 +44,7 @@ The second dataset —— 'interactions', contains 731,927 rows and four columns
 The data types of the columns of 'recipes' are shown below:
 
 | Column             | Description |
-| :----------------- | :---------- |
+| :--------| :---------- |
 | `'name'`           | object      |
 | `'id'`             | int64       |
 | `'minutes'`        | int64       |
@@ -55,6 +55,7 @@ The data types of the columns of 'recipes' are shown below:
 | `'n_steps'`        | int64       |
 | `'steps'`          | object      |
 | `'description'`    | object      |
+
 -First we convert the submitted column to the Datatime type. This is because the data in this column represents the month and year when the recipe was submitted. Converting to Datatime type facilitates subsequent exploration of the data.
 
 -Second, combine our concerns. The protein content in each recipe needs to be obtained. So we need to take the 7 types of information contained in nutrition ('calories (#)', 'total fat (PDV)', 'sugar (PDV)', 'sodium (PDV)', 'protein (PDV)', 'saturated fat (PDV)', 'carbohydrates (PDV)') and extract and each became a new column.
