@@ -42,7 +42,7 @@ The second dataset —— 'interactions', contains 731,927 rows and four columns
 ### 1. Data cleansing and organization of the two Datasets respectively
 (1) To 'recipes'
 The data types of the columns of 'recipes' are shown below:
-- | Column             | Description |
+     | Column             | Description |
      | :----------------- | :---------- |
      | `'name'`           | object      |
      | `'id'`             | int64       |
