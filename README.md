@@ -45,26 +45,82 @@ The second dataset —— 'interactions', contains 731,927 rows and four columns
 ## Data Cleaning and Exploratory Data Analysis 
 ### 1. Data cleansing and organization of the two Datasets respectively
 (1) To 'recipes'
-The data types of the columns of 'recipes' are shown below:
-
-| Column             | Description |
-| :--------| :---------- |
-| `'name'`           | object      |
-| `'id'`             | int64       |
-| `'minutes'`        | int64       |
-| `'contributor_id'` | int64       |
-| `'submitted'`      | object      |
-| `'tags'`           | object      |
-| `'nutrition'`      | object      |
-| `'n_steps'`        | int64       |
-| `'steps'`          | object      |
-| `'description'`    | object      |
 
 - First we convert the submitted column to the Datatime type. This is because the data in this column represents the month and year when the recipe was submitted. Converting to Datatime type facilitates subsequent exploration of the data.
 
 - Second, combine our concerns. The protein content in each recipe needs to be obtained. So we need to take the 7 types of information contained in nutrition **('calories (#)', 'total fat (PDV)', 'sugar (PDV)', 'sodium (PDV)', 'protein (PDV)', 'saturated fat (PDV)', 'carbohydrates (PDV)')** and extract and each became a new column.
 
+(2) To 'interactions'
+- We convert the date data in the interaction to the datatime type. This is convenient for use in subsequent processes.
 
+### 2.Left merge the recipes and interactions datasets on id and recipe_id.
+Record the merged table as **all_df**.The merged and converted data is shown below:
+| Column                  | Description    |
+| :---------------------- | :------------- |
+| `'name'`                | object         |
+| `'id'`                  | int64          |
+| `'minutes'`             | int64          |
+| `'contributor_id'`      | int64          |
+| `'submitted'`           | datetime64[ns] |
+| `'tags'`                | object         |
+| `'nutrition'`           | object         |
+| `'n_steps'`             | int64          |
+| `'steps'`               | object         |
+| `'description'`         | object         |
+| `'ingredients'`         | object         |
+| `'n_ingredients'`       | int64          |
+| `'user_id'`             | float64        |
+| `'recipe_id'`           | float64        |
+| `'date'`                | datetime64[ns] |
+| `'rating'`              | float64        |
+| `'review'`              | object         |
+| `'calories (#)'`        | float64        |
+| `'total fat (PDV)'`     | float64        |
+| `sugar (PDV)'`          | float64        |
+| `'sodium (PDV)'`        | float64        |
+| `'protein (PDV)'`       | float64        |
+| `'saturated fat (PDV)'` | float64        |
+| `'carbohydrates (PDV)'` | float64        |
+
+### 3.Fill all ratings of 0 with np.nan.
+Rating is generally on a scale from 1 to 5, 1 meaning the lowest rating while 5 means the highest rating. With that being said, a rating of 0 indicates missing values in rating. With that being said, a rating of 0 indicates missing values in rating. Replacing all values in the merged dataset that have a rating of 0 with np.nan clearly indicates missing data, rather than incorrectly using 0 as the actual rating. When calculating averages or other statistics, using 0 as a rating may pull down the average, resulting in an inaccurate analysis. Replacing 0 with NaN avoids this.
+
+### 4.Calculate the average rating for each recipe as `'average_rating'`
+Different users may have different feelings about the same recipe and thus give different ratings. We calculate the average score of a recipe to get a more objective understanding of the rating of a given recipe.
+
+### 5.Calculate the `'pro_proportion'`
+''pro_proportion'' is the percentage of protein to total calories in the recipe. To calculate it, we divide the value in the Protein (PDV) column by 100% to get the value in decimal form. Then, we multiply by 50 to convert the value to grams of protein, since 50 grams of protein is 100% of the daily intake value (PDV). We know from literature data that 1 gram of protein contains 4 grams of calories, so we multiply by 4. After all of these conversions, we get the number of calories in protein, so we can divide the total calories in the recipe by the number of calories in protein to get the percentage of protein in total calories. This data cleaning step is critical and allows us to compare the protein content of recipes in parallel without having to worry about the values being too large, since all values are between 0 and 1.
+
+### Result
+After the above steps, we can get the information of each column of the final processed all_df data:
+| Column                  | Description    |
+| :---------------------- | :------------- |
+| `'name'`                | object         |
+| `'id'`                  | int64          |
+| `'minutes'`             | int64          |
+| `'contributor_id'`      | int64          |
+| `'submitted'`           | datetime64[ns] |
+| `'tags'`                | object         |
+| `'nutrition'`           | object         |
+| `'n_steps'`             | int64          |
+| `'steps'`               | object         |
+| `'description'`         | object         |
+| `'ingredients'`         | object         |
+| `'n_ingredients'`       | int64          |
+| `'user_id'`             | float64        |
+| `'recipe_id'`           | float64        |
+| `'date'`                | datetime64[ns] |
+| `'rating'`              | float64        |
+| `'review'`              | object         |
+| `'average rating'`      | object         |
+| `'calories (#)'`        | float64        |
+| `'total fat (PDV)'`     | float64        |
+| `sugar (PDV)'`          | float64        |
+| `'sodium (PDV)'`        | float64        |
+| `'protein (PDV)'`       | float64        |
+| `'saturated fat (PDV)'` | float64        |
+| `'carbohydrates (PDV)'` | float64        |
+| `'pro_proportion'`          | float64           |
 
 ## Assessment of Missingness ##
 ## Hypothesis Testing ##
