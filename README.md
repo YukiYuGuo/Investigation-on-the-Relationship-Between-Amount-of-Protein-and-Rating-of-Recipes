@@ -123,7 +123,8 @@ After the above steps, we can get the information of each column of the final pr
 | `'pro_proportion'`          | float64           |
 
 
-
+### Univariate Analysis
+In this analysis, we studied the distribution of ''pro_proportion'' in recipes as shown in the graph below. The distribution is left-skewed, indicating that most recipes on food.com have a low protein proportion. Additionally, there is a decreasing trend, suggesting that as the protein proportion in recipes increases, the number of recipes on food.com also decreases. This is consistent with normal life. Under the assumption that individual differences are disregarded, the recommended protein caloric intake for normal individuals is typically around 10%-30% of total calories. Hence, it is evident that most of the recipes on the site conform to nutritional standards.
  <iframe
    src="assets/assetspic1.html"
    width="800"
@@ -131,7 +132,88 @@ After the above steps, we can get the information of each column of the final pr
    frameborder="0"
  ></iframe>
 
+From the box plot, we can see that the median of pro_proportion is about 0.124. This is not a very high value. To maximize fitness effects, we would expect the protein proportion to exceed 20% of the total calories. We speculate that recipes on food.com are not deliberately designed to increase the proportion of protein to achieve muscle-building effects. Perhaps people do not vary their ratings based on the amount of protein either. We will discuss this hypothesis further in subsequent analyses
+<iframe
+   src="assets/assetspic2.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+ 
+### Bivariate Analysis
+In our analysis of the relationship between protein proportion (pro_proportion) and ratings (Rating) under different preparation time categories, we found that regardless of the recipe ratings, there is a general trend that higher protein content requires longer cooking times. However, recipes with higher ratings tend to have slightly higher protein content for 30-minute cooking times compared to those requiring 60 minutes. Strictly speaking, the two factors we selected seem to have little impact on recipe ratings.
+<iframe
+   src="assets/assetspic3.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+ 
+### Interesting Aggregates
+
+
+
+
 ## Assessment of Missingness ##
+In our dataset, three columns, 'date', 'rating', and 'review', have a significant number of missing values. Therefore, we decided to assess the situation of these missing values.
+
+### NMAR Analysis
+We believe the absence of entries in the "review" column results from NMAR (Not Missing At Random). We consider that the primary target audience for these recipes is likely young people who may not have much life experience or may not have cooked before adulthood. A good recipe can help them satisfy their taste buds or organize gatherings effectively. However, considering the busy pace of modern life, they might choose to use the recipes without taking the time to leave personal feedback or ratings. Writing a review could be seen as a waste of time for them. Of course, we also consider the elderly demographic, who may not be familiar with navigating websites and may not know how to leave a review. These are all subjective behaviors of the viewers, so they do not leave any feedback related to the recipes.
+
+### Missingness Dependency
+Next, we will conduct a correlation test on the "rating" column to study whether the missingness in the "rating" column depends on the "pro_proportion" column (i.e., the proportion of protein in total calories) or the "minutes" column (i.e.the time required to prepare the recipe).
+
+1. Proportion of Protein and Rating
+   
+**Null Hypothesis:** The distribution of the 'pro_proportion' column is independent of whether the 'rating' column is missing, meaning there is no relationship between the two.
+**Alternate Hypothesis:** The distribution of the 'pro_proportion' column is not independent of whether the 'rating' column is missing, meaning there is a relationship between the two.
+**Test Statistic:** The absolute difference of mean in the proportion of protein of the distribution of the group without missing ratings and the distribution of the group without missing ratings.
+**Significance Level:** 0.15
+<iframe
+   src="assets/assetspic6.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+
+We ran another permutation test by shuffling the missingness of rating for 10000 times to collect 10000 simulating mean differences in the two distributions as described in the test statistic.
+
+<iframe
+   src="assets/assetspic7.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+
+The observed statistic of 0.00387 is indicated by the red vertical line on the graph. Since the p_value that we found (0.0) is < 0.05 which is the significance level that we set, we reject the null hypothesis. The missingness of 'rating' does depend on the 'pro——proportion', which is proportion of protein in the recipe.
+
+2. Proportion of Protein and Rating
+   
+**Null Hypothesis:** The distribution of the 'minutes' column is independent of whether the 'rating' column is missing, meaning there is no relationship between the two.
+**Alternate Hypothesis:** The distribution of the 'minutes' column is not independent of whether the 'rating' column is missing, meaning there is a relationship between the two.
+**Test Statistic:** bsolute difference of mean in the proportion of protein of the recipe in minutes of the distribution of the group without missing ratings and the distribution of the group without missing ratings.
+**Significance Level:** 0.05
+<iframe
+   src="assets/assetspic4.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+We ran permutation test by shuffling the missingness of rating for 10000 times to collect 10000 simulating mean differences in the two distributions as described in the test statistic.
+
+<iframe
+   src="assets/assetspic5.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+ 
+The **observed statistic** of **51.4524** is indicated by the red vertical line on the graph. 
+Since the **p-value** that we found **(0.123)** is > 0.05 which is the significance level that we set, 
+we **fail to reject the null hypothesis**.The missingness of rating does not depend on the cooking time in minutes of the recipe
+
+
+ 
 ## Hypothesis Testing ##
 
 
