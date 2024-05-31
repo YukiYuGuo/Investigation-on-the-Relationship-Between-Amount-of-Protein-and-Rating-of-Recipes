@@ -163,11 +163,14 @@ We believe the absence of entries in the "review" column results from NMAR (Not 
 ### Missingness Dependency
 Next, we will conduct a correlation test on the "rating" column to study whether the missingness in the "rating" column depends on the "pro_proportion" column (i.e., the proportion of protein in total calories) or the "minutes" column (i.e.the time required to prepare the recipe).
 
-1. Proportion of Protein and Rating
+-Proportion of Protein and Rating
    
 **Null Hypothesis:** The distribution of the 'pro_proportion' column is independent of whether the 'rating' column is missing, meaning there is no relationship between the two.
+
 **Alternate Hypothesis:** The distribution of the 'pro_proportion' column is not independent of whether the 'rating' column is missing, meaning there is a relationship between the two.
+
 **Test Statistic:** The absolute difference of mean in the proportion of protein of the distribution of the group without missing ratings and the distribution of the group without missing ratings.
+
 **Significance Level:** 0.15
 <iframe
    src="assets/assetspic6.html"
@@ -187,10 +190,10 @@ We ran another permutation test by shuffling the missingness of rating for 10000
 
 The observed statistic of 0.00387 is indicated by the red vertical line on the graph. Since the p_value that we found (0.0) is < 0.05 which is the significance level that we set, we reject the null hypothesis. The missingness of 'rating' does depend on the 'pro——proportion', which is proportion of protein in the recipe.
 
-2. Proportion of Protein and Rating
+-Minutes and Rating
    
-**Null Hypothesis:** The distribution of the 'minutes' column is independent of whether the 'rating' column is missing, meaning there is no relationship between the two.
-**Alternate Hypothesis:** The distribution of the 'minutes' column is not independent of whether the 'rating' column is missing, meaning there is a relationship between the two.
+**Null Hypothesis:** The distribution of the ''minutes'' column is independent of whether the 'rating' column is missing, meaning there is no relationship between the two.
+**Alternate Hypothesis:** The distribution of the ''minutes'' column is not independent of whether the 'rating' column is missing, meaning there is a relationship between the two.
 **Test Statistic:** bsolute difference of mean in the proportion of protein of the recipe in minutes of the distribution of the group without missing ratings and the distribution of the group without missing ratings.
 **Significance Level:** 0.05
 <iframe
@@ -215,7 +218,36 @@ we **fail to reject the null hypothesis**.The missingness of rating does not dep
 
  
 ## Hypothesis Testing ##
+As per our initial purpose, we are keen to find out whether people have the same rating standards for recipes with different protein contents. According to nutritional standards, we classify recipes with a ''pro_proportion'' between [0.2,0.3] as muscle-building recipes.Thus, our research question becomes more specific: we want to know whether people have the same rating standards for muscle-building recipes and non-muscle-building recipes.
 
+To investigate the question, we ran a **permutation test** with the following hypotheses, test statistic, and significance level.
+
+**Null Hypothesis:** People rate all the recipes on the same standard.
+
+**Alternate Hypothesis:** People rate non-muscle-building recipes lower than  muscle-building recipes.
+
+**Test Statistic:**  The difference in mean between rating of muscle-building recipes and non-muscle-building recipes.
+
+**Significance Level:** 0.05
+
+The reason we chose to conduct a permutation test is that we lack specific information about the demographic of the reviewers, and we want to verify whether these two distributions appear to come from the same population. We hypothesize that people rate non-muscle-building recipes lower due to a strong contemporary awareness of health and fitness, leading them to consciously increase the protein content in recipes to support muscle growth. We aim to understand the objective opinions of the population, which is why we used individual ratings instead of the average rating of the recipes. In testing the statistic, we chose the difference in the mean ratings of the two groups of recipes rather than the absolute difference in means. This is because we have a directional hypothesis: that people rate non-muscle-building recipes lower than other recipes.
+
+Then we shuffled the ratings for 10000 times to collect 10000 simulating mean differences in the two distributions as described in the test statistic. We got a p-value of **0.996**.
+
+<iframe
+   src="assets/assetspic8.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+
+ 
+Since the **p-value** that we found **(0.996)** is > 0.05 which is the significance level that we set, 
+we **fail to reject the null hypothesis**.
+
+
+### Conclusion of Permutation Test###
+This result is quite interesting. It indicates that people have the same rating standards for all recipes and that there is no evidence that they rate muscle-building recipes higher. A reasonable explanation for this result is that although people are increasingly focusing on health, they do not necessarily emphasize building muscle deliberately. Instead, they enjoy the pleasure that comes from exercising itself.
 
 ## Framing a Prediction Problem ##
 Since Hypothesis Testing found that how much protein is in a recipe does not affect how people rate the recipe. So we won't delve into this issue in the prediction session.
