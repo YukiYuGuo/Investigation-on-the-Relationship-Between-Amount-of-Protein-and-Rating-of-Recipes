@@ -142,7 +142,9 @@ After training and testing, the model's R-squared for the training set is approx
 ## Final Model ##
 1.level 1 variables 
 Considering that different combinations of the six major nutrients might have a more significant impact on calorie variations, we decided to pair and standardize the following nutrients: total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV). We then predicted calories and calculated the R-squared for each combination. The final results are as follows:
+
  |Variable Pair | R² Score|
+ | :----------------- | :-------------|
  |(total fat(PDV), carbohydrates(PDV)) | 0.971969|
  |(total fat(PDV), sugar(PDV)) | 0.893037|
  |(saturated fat(PDV), carbohydrates(PDV)) | 0.868305|
@@ -170,7 +172,9 @@ The diversity and complexity of recipe steps often involve multiple cooking tech
 
 3.Final result
 Based on these considerations, we combine variables from Level 1 and Level 2 to construct a multiple linear regression model and perform cross-validation to reduce the randomness and bias brought about by specific data splits. This approach makes the model's evaluation results more reliable and stable. The R-squared scores and RMSE values obtained for each combination are as follows:
+
  |Variable Pair | R² Score| RMSE |
+ | :--------------------------| :-------- |：---------|
  |carbohydrates(PDV) & Level 2 | 0.6532 |340.21 |
  |(total fat(PDV), carbohydrates(PDV)) & Level 2 |0.9712 | 97.28 |
  |(total fat(PDV), sugar(PDV)) & Level 2| 0.8847 | 197.50 |
