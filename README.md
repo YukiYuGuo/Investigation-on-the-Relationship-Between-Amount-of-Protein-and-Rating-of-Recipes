@@ -122,6 +122,15 @@ After the above steps, we can get the information of each column of the final pr
 | `'carbohydrates (PDV)'` | float64        |
 | `'pro_proportion'`          | float64           |
 
+
+
+<iframe
+  src="assets/assetspic1.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ## Assessment of Missingness ##
 ## Hypothesis Testing ##
 
