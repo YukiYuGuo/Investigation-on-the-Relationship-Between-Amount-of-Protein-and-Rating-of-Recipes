@@ -168,7 +168,7 @@ In this task, we studied the relationship between cooking time in minutes and th
 Interestingly, the chart shows that as cooking time increases, the proportion of protein in the recipes fluctuates more significantly. The lines representing the maximum and minimum values display extreme variations, which might indicate that certain cooking times or methods have a considerable impact on the protein content of the food. The maximum value line (purple line) spikes at certain points, showing that some recipes have extremely high protein content at specific cooking times, possibly due to certain types of ingredients or cooking methods. The mean (red line) and median (blue line), although fluctuating, remain relatively stable and are concentrated in a lower range. This suggests that despite the presence of extreme values, the protein proportion in most data points is not high.
 
 <iframe
-   src="assets/assetspic10.html"
+   src="assets/assetspic11.html"
    width="800"
    height="600"
    frameborder="0"
