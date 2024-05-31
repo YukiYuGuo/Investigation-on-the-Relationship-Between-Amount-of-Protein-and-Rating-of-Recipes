@@ -11,7 +11,6 @@ Protein is an essential nutrient for human health, vital for the formation of ce
 For this purpose, we analyzed two datasets, including recipes and interactions posted on  [food.com](https://www.food.com/). The original purpose of the datasets is for the recommender system research paper, [Generating Personalized Recipes from Historical User Preferences](https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf) by Majumder et al.
 
 For the first dataset —— `recipe`, contains 83782 rows, indicating 83782 unique recipes, with 10 columns . It contains the basic information contained in a recipe screen on the [food.com](https://www.food.com/) Web site. The columns information is as follows:
-
 | Column             | Description                                                                           
 | :----------------- | :-------------------------------------------------------------------------------------
 | `'name'`           | Recipe name                                                                           
@@ -33,7 +32,6 @@ PDV calculation formula：$$
 $$
 
 The second dataset —— 'interactions', contains 731,927 rows and four columns. Contains basic information about user comments. The information in each column is as follows:
-
 | Column        | Description         |
 | :------------ | :------------------ |
 | `'user_id'`   | User ID             |
