@@ -149,9 +149,32 @@ In our analysis of the relationship between protein proportion (pro_proportion) 
    frameborder="0"
  ></iframe>
  
-### Interesting Aggregates
+### Interesting Aggregates###
 
+In this task, we studied the relationship between cooking time in minutes and the proportion of protein in the recipes. First, we created a small DataFrame called "filter_df" to store cooking times in minutes, excluding outliers. We identified outliers using the IQR method. After grouping the cooking times and protein proportions into a pivot table as shown below, we created a data visualization for better understanding.
 
+ |minutes| (‘mean’, ‘prop_sugar’)| (‘median’, ‘prop_sugar’) |(‘min’, ‘prop_sugar’)|(‘max’, ‘prop_sugar’)
+ | :------------| :-------- | :---------|:---------|:---------|
+ |0|	0.361354|	0.361354|	0.361354|	0.361354|
+|1|	0.000000|	0.469341|	0.036326|	0.000000|
+|2|	0.000000|	0.677966|	0.059531|	0.027885|
+|3|	0.000000|	0.447080|	0.069858|	0.037036|
+|4|	0.000000|	0.727884|	0.101880|	0.073368|
+|...|	...|	...|	...|	...|
+|115|	0.000000|	0.551865|	0.163938|	0.138143|
+|116|	0.014848|	0.068463|	0.041655|	0.041655|
+|117|	0.235664|	0.235664|	0.235664|	0.235664|
+|118|	0.028571|	0.028571|	0.028571|	0.028571|
+|120|	0.000000|	0.744136|	0.158732|	0.131690|
+
+Interestingly, the chart shows that as cooking time increases, the proportion of protein in the recipes fluctuates more significantly. The lines representing the maximum and minimum values display extreme variations, which might indicate that certain cooking times or methods have a considerable impact on the protein content of the food. The maximum value line (purple line) spikes at certain points, showing that some recipes have extremely high protein content at specific cooking times, possibly due to certain types of ingredients or cooking methods. The mean (red line) and median (blue line), although fluctuating, remain relatively stable and are concentrated in a lower range. This suggests that despite the presence of extreme values, the protein proportion in most data points is not high.
+
+<iframe
+   src="assets/assetspic10.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
 
 
 ## Assessment of Missingness ##
@@ -298,7 +321,7 @@ The diversity and complexity of recipe steps often involve multiple cooking tech
 Based on these considerations, we combine variables from Level 1 and Level 2 to construct a multiple linear regression model and perform cross-validation to reduce the randomness and bias brought about by specific data splits. This approach makes the model's evaluation results more reliable and stable. The R-squared scores and RMSE values obtained for each combination are as follows:
 
  |Variable Pair | R² Score| RMSE |
- | :--------------------------| :-------- |：---------|
+ | :--------------------------| :-------- | :---------|
  |carbohydrates(PDV) & Level 2 | 0.6532 |340.21 |
  |(total fat(PDV), carbohydrates(PDV)) & Level 2 |0.9712 | 97.28 |
  |(total fat(PDV), sugar(PDV)) & Level 2| 0.8847 | 197.50 |
@@ -307,3 +330,22 @@ Based on these considerations, we combine variables from Level 1 and Level 2 to 
  
 Based on the results, our final model has significantly outperformed the baseline model, indicating that predictions using multiple nutrients are more effective than those using a single nutrient. However, the results are not much different from those predicted by Level 1 variables alone. This suggests that among the variables that significantly affect the caloric content of recipes, the combination of various nutrients is a key variable or has a more decisive influence.
 ## Fairness Analysis ##
+
+In our fairness analysis, we focus on the "minutes" feature. First, we divide the recipes into long-duration and short-duration recipes based on the median cooking time. Recipes with "minutes" less than or equal to 35.0 are classified as short-duration, while recipes with "minutes" greater than 35.0 are classified as long-duration. Here, 35.0 is the median of the "minutes" feature. During data exploration, we discovered that "minutes" has many high outliers, which inflate the mean "minutes" value, leading to biased results. Additionally, the "tags" column categorizes recipes into three types: "15-minutes-or-less," "30-minutes-or-less," and "60-minutes-or-less." The mean "minutes" value is approximately 106.799, which is clearly skewed from the classification. Therefore, we choose to use the median instead of the mean as the threshold. We aim to evaluate the accuracy parity of two models because we believe that accurately identifying the calorie content of recipes across all rating instances is more crucial. False positive results are undesirable as they mislead users with incorrect calorie information.
+
+**Null Hypothesis:** Our model is fair. The accuracy of the model for long-duration recipes and short-duration recipes is roughly the same, and any observed differences are merely due to random chance.
+
+**Alternate Hypothesis:** Our model is unfair. The accuracy of the model for short-duration recipes is lower than for long-duration recipes. This indicates that the model exhibits bias when handling recipes with different cooking times.
+
+**Test Statistic:**  The difference in accuracy between short-duration recipes and long-duration recipes.
+
+**Significance Level:** 0.05
+
+<iframe
+   src="assets/assetspic9.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
+
+To run the permutation test, we created a new column "is_long_cooking" using the median of "minutes" as the threshold to distinguish between long-duration and short-duration recipes. When we calculated the accuracy difference between them, we obtained **0.833**（For ease of chart presentation, the observed statistic is not labeled in the graph）. We shuffled "is_long_cooking" 1000 times to collect 1000 test statistics describing the permutation differences between the two distributions. After performing the permutation test, we obtained a **p-value of 0.0**. Since p_value (0.0) < 0.05, we reject the null hypothesis that "our model is fair," indicating that the accuracy for short-duration recipes is lower than for long-duration recipes.
