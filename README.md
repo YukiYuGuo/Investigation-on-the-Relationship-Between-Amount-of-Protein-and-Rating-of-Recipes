@@ -124,12 +124,12 @@ After the above steps, we can get the information of each column of the final pr
 
 
 
-<iframe
-  src="assets/assetspic1.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+ <iframe
+   src="assets/assetspic1.html"
+   width="800"
+   height="600"
+   frameborder="0"
+ ></iframe>
 
 ## Assessment of Missingness ##
 ## Hypothesis Testing ##
