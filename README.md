@@ -30,8 +30,7 @@ For the first dataset —— `recipe`, contains 83782 rows, indicating 83782 uni
 | `'n_ingredients'`  | Number of ingredients in recipe                                                                                                                                                                   |
 
 *Annotate : PDV (Predicted Daily Value) is a marker used to assess the extent to which a nutrient in a food contributes to the required daily intake.PDV is calculated based on the Recommended Daily Intake (RDI) or Daily Reference Value (DRV). Values). This type of labeling helps consumers understand the extent to which the amount of a nutrient in a single food or beverage complements their daily nutritional needs.
-PDV calculation formula：
-![formulate1](/assets/formulate1.png "formulate1")
+
 
 The second dataset —— 'interactions', contains 731,927 rows and four columns. Contains basic information about user comments. The information in each column is as follows:
 
