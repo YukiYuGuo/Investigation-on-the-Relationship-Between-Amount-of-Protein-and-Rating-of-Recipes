@@ -345,7 +345,7 @@ Different ingredients and cooking methods can affect the cooking time of a dish.
 
 The diversity and complexity of recipe steps often involve multiple cooking techniques. For example, a recipe may include frying, boiling, and baking steps, each of which can contribute to the final caloric content of the dish. Cooking methods that use a lot of fat, such as frying and sautéing, generally increase the total calories of a dish. Complex recipe steps may require more ingredient processing, such as slicing, chopping, or marinating, which can make the ingredients more likely to absorb the fats and seasonings added during cooking, thus increasing calories. Therefore, we believe that the number of steps (n_steps) is also a factor affecting the caloric content of food.
 
-3.Final result
+### Final result
 
 Based on these considerations, we combine variables from Level 1 and Level 2 to construct a multiple linear regression model and perform cross-validation to reduce the randomness and bias brought about by specific data splits. This approach makes the model's evaluation results more reliable and stable. The R-squared scores and RMSE values obtained for each combination are as follows:
 
